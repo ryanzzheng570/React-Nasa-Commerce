@@ -1,8 +1,11 @@
+import React from "react";
+import MainPage from "./component/MainPage";
 
-function App() {
+const App = () => {
   return (
-    <div>
-    </div>
+    <React.Fragment>
+      <MainPage />
+    </React.Fragment>
   );
 }
 
