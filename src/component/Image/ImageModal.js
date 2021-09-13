@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     },
     explanation: {
         maxHeight: 210,
-        overflowY: 'scroll',
+        overflowY: 'auto',
         '&::-webkit-scrollbar': {
             width: '0.2em'
         },
