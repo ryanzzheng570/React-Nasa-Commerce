@@ -4,6 +4,7 @@ import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles'
 import Appbar from './AppBar/Appbar';
 import { Grid } from '@material-ui/core'
+import Images from './Image/Images';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -43,16 +44,7 @@ const MainPage = () => {
         <div className={classes.root}>
             <Appbar />
             <Grid className={classes.imageContainer}>
-                {imageJSONList.length > 0 && imageJSONList.map((imageJSON, index) => {
-                    return (
-                        <div key={index}>
-                            <span>{imageJSON.date}</span>
-                            <span>{imageJSON.explanation}</span>
-                            <span>{imageJSON.hdurl}</span>
-                            <span>{imageJSON.title}</span>
-                        </div>
-                    )
-                })}
+                <Images images={imageJSONList} />
             </Grid>
 
         </div>
