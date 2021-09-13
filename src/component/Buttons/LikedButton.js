@@ -27,6 +27,7 @@ const LikedButton = () => {
         setShowToolTip(true);
     }
 
+    //Handler to close tool tip
     const handleToolTipClose = () => {
         setShowToolTip(false);
     }
