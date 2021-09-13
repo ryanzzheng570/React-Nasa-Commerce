@@ -105,7 +105,7 @@ const ImageModal = ({ image }) => {
             >
                 <Fade in={isOpen}>
                     <div className={classes.paper}>
-                        <img className={classes.hdimage} src={image.hdurl} alt="" />
+                        <img className={classes.hdimage} src={image.hdurl} alt={image.title} />
                     </div>
                 </Fade>
             </Modal>
