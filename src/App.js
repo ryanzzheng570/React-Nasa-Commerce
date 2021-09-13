@@ -1,7 +1,7 @@
 import React from "react";
 import MainPage from "./component/MainPage";
 import { MuiThemeProvider } from '@material-ui/core';
-import { theme } from "./thems/theme";
+import { theme } from "./themes/theme";
 
 const App = () => {
   return (

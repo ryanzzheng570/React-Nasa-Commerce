@@ -16,12 +16,13 @@ const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 400,
         marginLeft: theme.spacing(10),
+        marginBottom: theme.spacing(5)
     },
     media: {
         height: 400,
     },
     explanation: {
-        maxHeight: 210,
+        maxHeight: 230,
         overflowY: 'auto',
         '&::-webkit-scrollbar': {
             width: '0.2em'
@@ -30,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: 'rgba(0,0,0,.1)',
             outline: '1px solid #f5f5f5'
         }
+    },
+    content: {
+        height: 285
     }
 }));
 
@@ -49,7 +53,7 @@ const ImageModal = ({ image }) => {
                     title={image.title}
                 />
             </CardActionArea>
-            <CardContent>
+            <CardContent className={classes.content}>
                 <Typography gutterBottom variant="h5" component="h2">
                     {image.title}
                 </Typography>
