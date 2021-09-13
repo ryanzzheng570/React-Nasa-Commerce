@@ -1,8 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import { makeStyles } from '@material-ui/core/styles'
+import Appbar from './AppBar/Appbar';
+import { Grid } from '@material-ui/core'
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+        backgroundColor: theme.palette.grey[100]
+    },
+    imageContainer: {
+        paddingTop: theme.spacing(1),
+    }
+}));
 
 const MainPage = () => {
+    const classes = useStyles();
     const [imageJSONList, setImageJSON] = useState([]);
 
     const getImageJSONFromNASA = async (startDate, endDate) => {
@@ -10,16 +24,13 @@ const MainPage = () => {
         let dataList = [];
         if (startDate && endDate) {
             const dateRange = `&start_date=${startDate.format('YYYY-MM-DD')}&end_date=${endDate.format('YYYY-MM-DD')}`;
-
             nasaAPI = nasaAPI.concat(dateRange);
-            debugger;
             const { data } = await axios.get(nasaAPI);
             dataList = data;
         } else {
             const { data } = await axios.get(nasaAPI);
             dataList.push(data);
         }
-
 
         setImageJSON(dataList);
     }
@@ -29,17 +40,20 @@ const MainPage = () => {
     }, []);
 
     return (
-        <div>
-            {imageJSONList.length > 0 && imageJSONList.map((imageJSON, index) => {
-                return (
-                    <div key={index}>
-                        <span>{imageJSON.date}</span>
-                        <span>{imageJSON.explanation}</span>
-                        <span>{imageJSON.hdurl}</span>
-                        <span>{imageJSON.title}</span>
-                    </div>
-                )
-            })}
+        <div className={classes.root}>
+            <Appbar />
+            <Grid className={classes.imageContainer}>
+                {imageJSONList.length > 0 && imageJSONList.map((imageJSON, index) => {
+                    return (
+                        <div key={index}>
+                            <span>{imageJSON.date}</span>
+                            <span>{imageJSON.explanation}</span>
+                            <span>{imageJSON.hdurl}</span>
+                            <span>{imageJSON.title}</span>
+                        </div>
+                    )
+                })}
+            </Grid>
 
         </div>
     )

@@ -1,10 +1,14 @@
 import React from "react";
 import MainPage from "./component/MainPage";
+import { MuiThemeProvider } from '@material-ui/core';
+import { theme } from "./thems/theme";
 
 const App = () => {
   return (
     <React.Fragment>
-      <MainPage />
+      <MuiThemeProvider theme={theme}>
+        <MainPage />
+      </MuiThemeProvider>
     </React.Fragment>
   );
 }
