@@ -6,16 +6,12 @@ import {
     CardMedia,
     CardActions,
     CardContent,
-    IconButton,
     Modal,
     Fade,
-    ClickAwayListener,
-    Tooltip
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
-import ShareIcon from '@material-ui/icons/Share';
 import LikedButton from '../Buttons/LikedButton';
-
+import ShareButton from '../Buttons/ShareButton'
 //Styling
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -62,8 +58,6 @@ const useStyles = makeStyles((theme) => ({
 const ImageModal = ({ image }) => {
     const classes = useStyles();
     const [isOpen, setIsOpen] = useState(false);
-    // const [isLiked, setIsLiked] = useState(false);
-    const [isShareLinkCopied, setIsShareLinkCopied] = useState(false);
 
     //Handler for larger image clicked
     const handleMediaClicked = () => {
@@ -73,17 +67,6 @@ const ImageModal = ({ image }) => {
     //Handler to close the larger iamge
     const handleClose = () => {
         setIsOpen(false);
-    }
-
-    //Handler to share the iamge Link
-    const handleShareImageLink = (url) => {
-        navigator.clipboard.writeText(url);
-        setIsShareLinkCopied(true);
-    }
-
-    //Handler to close the Copied tooltip
-    const handleShareToolTipClose = () => {
-        setIsShareLinkCopied(false);
     }
 
     return (
@@ -109,25 +92,7 @@ const ImageModal = ({ image }) => {
                 </CardContent>
                 <CardActions>
                     <LikedButton />
-                    <ClickAwayListener onClickAway={handleShareToolTipClose}>
-                        <Tooltip
-                            PopperProps={{
-                                disablePortal: true,
-                            }}
-                            onClose={handleShareToolTipClose}
-                            open={isShareLinkCopied}
-                            disableFocusListener
-                            disableHoverListener
-                            disableTouchListener
-                            title="Copied"
-                            placement='top'
-                        >
-                            <IconButton onClick={() => handleShareImageLink(image.url)}>
-                                <ShareIcon />
-                            </IconButton>
-                        </Tooltip>
-                    </ClickAwayListener>
-
+                    <ShareButton imageUrl={image.url} />
                 </CardActions>
             </Card>
             <Modal
