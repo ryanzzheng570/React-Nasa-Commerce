@@ -8,10 +8,12 @@ import {
     CardContent,
     IconButton,
     Modal,
-    Fade
+    Fade,
+    ClickAwayListener,
+    Tooltip
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import FavoriteBorderRoundedIcon from '@material-ui/icons/FavoriteBorderRounded';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 
 const useStyles = makeStyles((theme) => ({
@@ -52,12 +54,17 @@ const useStyles = makeStyles((theme) => ({
     hdimage: {
         height: '100%',
         width: '100%'
+    },
+    liked: {
+        color: 'red'
     }
 }));
 
 const ImageModal = ({ image }) => {
     const classes = useStyles();
     const [isOpen, setIsOpen] = useState(false);
+    const [isLiked, setIsLiked] = useState(false);
+    const [isShareLinkCopied, setIsShareLinkCopied] = useState(false);
 
     const handleMediaClicked = () => {
         setIsOpen(true);
@@ -65,6 +72,19 @@ const ImageModal = ({ image }) => {
 
     const handleClose = () => {
         setIsOpen(false);
+    }
+
+    const handleLikeImage = () => {
+        setIsLiked(!isLiked);
+    }
+
+    const handleShareImageLink = (url) => {
+        navigator.clipboard.writeText(url);
+        setIsShareLinkCopied(true);
+    }
+
+    const handleShareToolTipClose = () => {
+        setIsShareLinkCopied(false);
     }
 
     return (
@@ -89,12 +109,28 @@ const ImageModal = ({ image }) => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <IconButton>
-                        <FavoriteBorderRoundedIcon />
+                    <IconButton onClick={handleLikeImage}>
+                        <FavoriteIcon className={isLiked ? classes.liked : ''} />
                     </IconButton>
-                    <IconButton>
-                        <ShareIcon />
-                    </IconButton>
+                    <ClickAwayListener onClickAway={handleShareToolTipClose}>
+                        <Tooltip
+                            PopperProps={{
+                                disablePortal: true,
+                            }}
+                            onClose={handleShareToolTipClose}
+                            open={isShareLinkCopied}
+                            disableFocusListener
+                            disableHoverListener
+                            disableTouchListener
+                            title="Copied"
+                            placement='top'
+                        >
+                            <IconButton onClick={() => handleShareImageLink(image.url)}>
+                                <ShareIcon />
+                            </IconButton>
+                        </Tooltip>
+                    </ClickAwayListener>
+
                 </CardActions>
             </Card>
             <Modal
