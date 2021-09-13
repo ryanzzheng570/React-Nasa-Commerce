@@ -46,7 +46,6 @@ const MainPage = () => {
             <Grid className={classes.imageContainer}>
                 <Images images={imageJSONList} />
             </Grid>
-
         </div>
     )
 }

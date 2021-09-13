@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
     },
     appBar: {
-        background: 'linear-gradient(45deg, #3b53da 55%, white)'
+        background: 'linear-gradient(45deg, #3b53da 45%, #289cff, white)'
     }
 }));
 
