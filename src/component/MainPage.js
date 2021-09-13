@@ -14,6 +14,7 @@ import {
 } from '@material-ui/core'
 import Images from './Image/Images';
 
+//Main Page styling
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -43,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+//Main Page Hook
 const MainPage = () => {
     const classes = useStyles();
     const [imageJSONList, setImageJSON] = useState([]);
@@ -51,9 +53,12 @@ const MainPage = () => {
     const [selectedEndDate, setSelectedEndDate] = useState(moment().format('YYYY-MM-DD'));
     const [isSpecificDate, setIsSpecificDate] = useState(false);
 
+    //Function to retrieve image json from nasa API endpoint
     const getImageJSONFromNASA = async (startDate, endDate, isDateSpecific) => {
         let dataList = [];
+        //Base URL for GET request
         let nasaAPI = `https://api.nasa.gov/planetary/apod?api_key=${process.env.REACT_APP_NASA_API_KEY}`;
+        //Apply start date and end date if user specified start date and end date
         if (!isDateSpecific && startDate && endDate) {
             const dateRange = `&start_date=${startDate}&end_date=${endDate}`;
             nasaAPI = nasaAPI.concat(dateRange);
@@ -68,29 +73,36 @@ const MainPage = () => {
             dataList.push(data);
         }
 
+        //Set the list to rerender
         setImageJSON(dataList);
     }
 
+    //Use effect hook
     useEffect(() => {
         getImageJSONFromNASA(null, null, false);
     }, []);
 
+    //Handler to open date search section
     const handleDateSearch = () => {
         setIsDateSearch(!isDateSearch);
     }
 
+    //Handler for start date 
     const handleStartDate = (e) => {
         setSelectedStartDate(e.target.value);
     }
 
+    //Handler for end date
     const handleEndDate = (e) => {
         setSelectedEndDate(e.target.value);
     }
 
+    //Handler for choosing image on a specific date
     const handleSpecificDateCheck = (e) => {
         setIsSpecificDate(e.target.checked);
     }
 
+    //Submit handler for searching by date
     const onSearchByDate = (e) => {
         e.preventDefault();
         setIsDateSearch(!isDateSearch);

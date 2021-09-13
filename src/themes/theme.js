@@ -1,5 +1,6 @@
 import { createTheme } from "@material-ui/core";
 
+//Theme for Material UI
 export const theme = createTheme({
     spacing: 10,
     typography: {
