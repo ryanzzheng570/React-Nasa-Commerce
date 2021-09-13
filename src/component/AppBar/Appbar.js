@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
+    container: {
         flexGrow: 1,
     },
     appBar: {
@@ -26,7 +26,7 @@ const Appbar = ({ handleDateSearch }) => {
     const classes = useStyles();
 
     return (
-        <div className={classes.root}>
+        <div className={classes.container}>
             <AppBar position='static' className={classes.appBar}>
                 <Toolbar>
                     <Typography variant='h6'>

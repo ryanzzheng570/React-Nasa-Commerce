@@ -12,13 +12,13 @@ import {
     ClickAwayListener,
     Tooltip
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import { makeStyles } from '@material-ui/core';
 import ShareIcon from '@material-ui/icons/Share';
+import LikedButton from '../Buttons/LikedButton';
 
 //Styling
 const useStyles = makeStyles((theme) => ({
-    root: {
+    container: {
         maxWidth: 400,
         marginLeft: theme.spacing(10),
         marginBottom: theme.spacing(5)
@@ -55,9 +55,6 @@ const useStyles = makeStyles((theme) => ({
     hdimage: {
         height: '100%',
         width: '100%'
-    },
-    liked: {
-        color: 'red'
     }
 }));
 
@@ -65,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 const ImageModal = ({ image }) => {
     const classes = useStyles();
     const [isOpen, setIsOpen] = useState(false);
-    const [isLiked, setIsLiked] = useState(false);
+    // const [isLiked, setIsLiked] = useState(false);
     const [isShareLinkCopied, setIsShareLinkCopied] = useState(false);
 
     //Handler for larger image clicked
@@ -76,11 +73,6 @@ const ImageModal = ({ image }) => {
     //Handler to close the larger iamge
     const handleClose = () => {
         setIsOpen(false);
-    }
-
-    //Handler for Like image
-    const handleLikeImage = () => {
-        setIsLiked(!isLiked);
     }
 
     //Handler to share the iamge Link
@@ -96,7 +88,7 @@ const ImageModal = ({ image }) => {
 
     return (
         <>
-            <Card className={classes.root}>
+            <Card className={classes.container}>
                 <CardActionArea onClick={handleMediaClicked}>
                     <CardMedia
                         className={classes.media}
@@ -116,9 +108,7 @@ const ImageModal = ({ image }) => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <IconButton onClick={handleLikeImage}>
-                        <FavoriteIcon className={isLiked ? classes.liked : ''} />
-                    </IconButton>
+                    <LikedButton />
                     <ClickAwayListener onClickAway={handleShareToolTipClose}>
                         <Tooltip
                             PopperProps={{

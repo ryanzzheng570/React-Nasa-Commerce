@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core'
 import Appbar from './AppBar/Appbar';
 import {
     Grid,
